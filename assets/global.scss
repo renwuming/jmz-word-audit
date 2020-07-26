@@ -1,0 +1,18 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  @include rem-baseline;
+  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  &.mobile {
+    @include rem-baseline(100%);
+  }
+  &.tablet {
+    @include rem-baseline(120%);
+  }
+  &.desktop {
+    @include rem-baseline(140%);
+  }
+}
