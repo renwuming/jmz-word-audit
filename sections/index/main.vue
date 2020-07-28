@@ -27,17 +27,19 @@
       <Tag>待入库</Tag>
     </div>
     <div v-show="menuName === 'contribution'">
-      <Tag>贡献榜</Tag>
+      <Contribution />
     </div>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, Ref, ref } from '@vue/composition-api'
 import AuditBox from './audit.vue'
+import Contribution from './contribution.vue'
 
 export default defineComponent({
   components: {
     AuditBox,
+    Contribution,
   },
   setup() {
     let menuName: Ref<string> = ref('audit')

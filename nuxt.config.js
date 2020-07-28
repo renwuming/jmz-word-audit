@@ -58,7 +58,7 @@ export default {
    */
   build: {},
   router: {
-    base: '/jmz-word/',
+    base: process.env.NODE_ENV === 'production' ? '/jmz-word/' : '',
   },
   env: {
     baseURL: process.env.BASE_URL,

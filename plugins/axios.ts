@@ -7,12 +7,14 @@ instanceAxios.interceptors.response.use(
   (res) => {
     const { data } = res
     if (data && data.code === 408) {
-      const callbackUrl = window.location.href
-      return instanceAxios
-        .get(`${process.env.authURL}/user/login/url?redirect=${callbackUrl}`)
-        .then((redirectUrl) => {
-          window.location.href = redirectUrl.toString()
-        })
+      if (process.env.NODE_ENV === 'production') {
+        const callbackUrl = window.location.href
+        return instanceAxios
+          .get(`${process.env.authURL}/user/login/url?redirect=${callbackUrl}`)
+          .then((redirectUrl) => {
+            window.location.href = redirectUrl.toString()
+          })
+      }
     }
     return res.data
   },
