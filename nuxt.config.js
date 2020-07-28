@@ -56,10 +56,10 @@ export default {
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
-  build: {
-    publicPath: 'https://www.renwuming.cn/jmz-word/_nuxt/',
+  build: {},
+  router: {
+    base: '/jmz-word/',
   },
-  router: {},
   env: {
     baseURL: process.env.BASE_URL,
     authURL: process.env.AUTH_URL,
