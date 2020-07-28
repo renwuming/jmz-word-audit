@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DeviceBadge />
+    <DeviceBadge v-if="isDevelopment" />
     <Nuxt />
   </div>
 </template>
