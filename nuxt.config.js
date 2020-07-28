@@ -39,6 +39,11 @@ export default {
    */
   plugins: ['~/plugins/composition-api', '~/plugins/view-ui'],
   /*
+   ** Nuxt.js modules
+   */
+  modules: ['@nuxtjs/axios'],
+  axios: {},
+  /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
    */
@@ -48,13 +53,13 @@ export default {
    */
   buildModules: ['@nuxt/typescript-build', '@nuxtjs/style-resources'],
   /*
-   ** Nuxt.js modules
-   */
-  modules: [],
-  /*
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {},
   router: {},
+  env: {
+    baseURL: process.env.BASE_URL,
+    authURL: process.env.AUTH_URL,
+  },
 }
