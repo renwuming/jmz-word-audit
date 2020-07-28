@@ -108,7 +108,7 @@ interface FormData {
 export default defineComponent({
   setup(_, ctx) {
     onBeforeMount(async () => {
-      console.log(await axios.get('/words/audit'))
+      console.log(await axios.get('/rooms/ownroom'))
     })
 
     let auditFormRef = ref()

@@ -3,7 +3,6 @@ import axios, { AxiosInstance } from 'axios'
 export const instanceAxios: AxiosInstance = axios.create({
   baseURL: process.env.baseURL,
 })
-console.log(process.env.authURL)
 instanceAxios.interceptors.response.use(
   (res) => {
     const { data } = res

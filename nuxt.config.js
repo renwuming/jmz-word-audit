@@ -56,7 +56,9 @@ export default {
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
-  build: {},
+  build: {
+    publicPath: 'https://www.renwuming.cn/jmz-word/_nuxt/',
+  },
   router: {},
   env: {
     baseURL: process.env.BASE_URL,
