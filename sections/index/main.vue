@@ -15,33 +15,55 @@
         <Icon type="logo-buffer" />
         待入库
       </MenuItem>
+      <MenuItem name="discard">
+        <Icon type="md-trash" />
+        已丢弃
+      </MenuItem>
       <MenuItem name="contribution">
         <Icon type="ios-ribbon" />
         贡献榜
       </MenuItem>
     </Menu>
-    <div v-show="menuName === 'audit'">
+    <div v-if="menuName === 'audit'">
       <AuditBox />
     </div>
-    <div v-show="menuName === 'database'">
-      <Tag>待入库</Tag>
+    <div v-if="menuName === 'database'">
+      <Confirm />
     </div>
-    <div v-show="menuName === 'contribution'">
+    <div v-if="menuName === 'discard'">
+      <Discard />
+    </div>
+    <div v-if="menuName === 'contribution'">
       <Contribution />
     </div>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, Ref, ref } from '@vue/composition-api'
+import { defineComponent, Ref, ref, onBeforeMount } from '@vue/composition-api'
+import { Store } from '~/store'
 import AuditBox from './audit.vue'
 import Contribution from './contribution.vue'
+import Confirm from './confirm.vue'
+import Discard from './discard.vue'
+import axios from '~/plugins/axios'
 
 export default defineComponent({
   components: {
     AuditBox,
+    Confirm,
     Contribution,
+    Discard,
   },
   setup() {
+    onBeforeMount(async () => {
+      // 获取用户基本信息
+      const { userInfo, isSuperAuditor } = await axios.post(
+        '/users/pc/validate'
+      )
+      Store.userInfo = userInfo
+      Store.isSuperAuditor = isSuperAuditor
+    })
+
     let menuName: Ref<string> = ref('audit')
 
     function onChangeMenu(name: string): void {
@@ -59,7 +81,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 .container {
   width: 100vw;
-  min-height: 100vh;
   .menu {
     display: flex;
     justify-content: space-between;
