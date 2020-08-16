@@ -20,7 +20,12 @@
     </div>
     <Form v-show="code.content" :label-width="80">
       <FormItem label="困难单词" prop="difficult">
-        <Icon v-if="code.difficult" type="md-checkmark" size="20" />
+        <div v-if="code.difficult">
+          <Icon type="md-checkmark" color="red" size="20" />
+          <Icon type="md-checkmark" color="red" size="20" />
+          <Icon type="md-checkmark" color="red" size="20" />
+          <Icon type="md-checkmark" color="red" size="20" />
+        </div>
         <Icon v-else type="md-close" size="20" />
       </FormItem>
       <FormItem label="类别" prop="category">
