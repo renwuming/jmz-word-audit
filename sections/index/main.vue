@@ -19,10 +19,10 @@
         <Icon type="md-trash" />
         已丢弃
       </MenuItem>
-      <MenuItem name="contribution">
+      <!-- <MenuItem name="contribution">
         <Icon type="ios-ribbon" />
         贡献榜
-      </MenuItem>
+      </MenuItem> -->
     </Menu>
     <div v-if="menuName === 'audit'">
       <AuditBox />
@@ -33,9 +33,9 @@
     <div v-if="menuName === 'discard'">
       <Discard />
     </div>
-    <div v-if="menuName === 'contribution'">
+    <!-- <div v-if="menuName === 'contribution'">
       <Contribution />
-    </div>
+    </div> -->
   </div>
 </template>
 <script lang="ts">
