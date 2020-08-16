@@ -42,7 +42,7 @@
             size="20"
             @click="
               () => {
-                onChangeDrawer(item)
+                onChangeDrawer(item.categoryID)
               }
             "
           />
