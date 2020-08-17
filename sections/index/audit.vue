@@ -23,9 +23,21 @@
         >剩余 {{ code.amount || '-' }}</Tag
       >
     </div>
-    <div class="row info" v-show="code.content">
-      <p class="label">贡献者</p>
-      <UserInfo :data="code.contributor" />
+    <div class="info" v-show="code.content">
+      <div class="row">
+        <p class="label">贡献者</p>
+        <UserInfo :data="code.contributor" />
+      </div>
+      <div v-if="code.similar && code.similar.length > 0" class="row">
+        <p class="label">词库相似</p>
+        <Tag
+          v-for="item of code.similar"
+          :key="item._id"
+          size="large"
+          :color="item.confirm ? 'success' : 'volcano'"
+          >{{ item.content }}</Tag
+        >
+      </div>
     </div>
     <Form
       v-show="code.content"
@@ -195,13 +207,9 @@ export default defineComponent({
   padding: rem(20px);
   .row {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     margin-bottom: rem(20px);
-    &.info {
-      background-color: #eee;
-      padding: rem(10px) 0;
-      border-radius: rem(10px);
-    }
     &.inline {
       margin-bottom: 0;
     }
@@ -221,6 +229,18 @@ export default defineComponent({
       line-height: 1;
       padding: 10px 12px 10px 0;
       box-sizing: border-box;
+    }
+  }
+  .info {
+    background-color: #eee;
+    padding: rem(10px) 0;
+    border-radius: rem(10px);
+    .row {
+      margin-bottom: rem(10px);
+      padding: 0 rem(10px);
+    }
+    .row:last-child {
+      margin-bottom: 0;
     }
   }
   .check-group {

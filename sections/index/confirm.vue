@@ -15,11 +15,23 @@
         >剩余 {{ code.amount || '-' }}</Tag
       >
     </div>
-    <div class="row info" v-show="code.content">
-      <p class="label">贡献者</p>
-      <UserInfo :data="code.contributor" />
-      <p class="label">审核者</p>
-      <UserInfo :data="code.auditor" />
+    <div class="info" v-show="code.content">
+      <div class="row">
+        <p class="label">贡献者</p>
+        <UserInfo :data="code.contributor" />
+        <p class="label">审核者</p>
+        <UserInfo :data="code.auditor" />
+      </div>
+      <div v-if="code.similar && code.similar.length > 0" class="row">
+        <p class="label">词库相似</p>
+        <Tag
+          v-for="item of code.similar"
+          :key="item._id"
+          size="large"
+          :color="item.confirm ? 'success' : 'volcano'"
+          >{{ item.content }}</Tag
+        >
+      </div>
     </div>
     <Form v-show="code.content" :label-width="80">
       <FormItem label="困难单词" prop="difficult">
@@ -195,15 +207,11 @@ export default defineComponent({
   padding: rem(20px);
   .row {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     margin-bottom: rem(20px);
     &.inline {
       margin-bottom: 0;
-    }
-    &.info {
-      background-color: #eee;
-      padding: rem(10px) 0;
-      border-radius: rem(10px);
     }
     &.center {
       justify-content: center;
@@ -227,6 +235,18 @@ export default defineComponent({
     }
     .user-list-item {
       margin-right: rem(-6px);
+    }
+  }
+  .info {
+    background-color: #eee;
+    padding: rem(10px) 0;
+    border-radius: rem(10px);
+    .row {
+      margin-bottom: rem(10px);
+      padding: 0 rem(10px);
+    }
+    .row:last-child {
+      margin-bottom: 0;
     }
   }
   .category-item {
