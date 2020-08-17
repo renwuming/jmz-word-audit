@@ -1,5 +1,10 @@
 <template>
   <div class="container">
+    <div class="row">
+      <Tag class="handle-btn" type="dot" color="warning"
+        >总计 {{ list.length }}</Tag
+      >
+    </div>
     <Button
       v-for="item of list"
       :key="item._id"
@@ -61,8 +66,14 @@ export default defineComponent({
 <style lang="scss" scoped>
 .container {
   padding: rem(20px);
+  .row {
+    display: flex;
+    align-items: center;
+    margin-bottom: rem(20px);
+  }
   .discard-word {
     margin-right: rem(10px);
+    margin-bottom: rem(10px);
   }
 }
 </style>

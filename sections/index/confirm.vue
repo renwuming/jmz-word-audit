@@ -11,6 +11,9 @@
         shape="circle"
         @click="onRefresh"
       ></Button>
+      <Tag class="handle-btn" type="dot" color="warning"
+        >剩余 {{ code.amount || '-' }}</Tag
+      >
     </div>
     <div class="row info" v-show="code.content">
       <p class="label">贡献者</p>
