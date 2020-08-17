@@ -11,6 +11,14 @@
         shape="circle"
         @click="onRefresh"
       ></Button>
+      <Button
+        v-show="isSuperAuditor"
+        class="handle-btn"
+        icon="md-trash"
+        type="error"
+        shape="circle"
+        @click="onDiscard"
+      ></Button>
       <Tag class="handle-btn" type="dot" color="warning"
         >剩余 {{ code.amount || '-' }}</Tag
       >
@@ -132,7 +140,7 @@ import { Store } from '~/store'
 
 export default defineComponent({
   components: { UserInfo },
-  setup() {
+  setup(_, ctx) {
     let categoryCodeList: Ref<Code[]> = ref([])
     let code: Ref<Code> = ref({
       content: '',
@@ -186,6 +194,21 @@ export default defineComponent({
       onRefresh()
     }
 
+    // 标记待审核词汇为【丢弃】
+    async function onDiscard() {
+      ctx.root.$Modal.confirm({
+        title: '确定要将该词标记为【丢弃】？',
+        onOk: async () => {
+          const { _id } = code.value
+          await axios.post('/words/audit', {
+            _id,
+            discarded: true,
+          })
+          onRefresh()
+        },
+      })
+    }
+
     return {
       categoryCodeList,
       isSuperAuditor,
@@ -198,6 +221,7 @@ export default defineComponent({
       handleOppose,
       handleConfirm,
       handleReaudit,
+      onDiscard,
     }
   },
 })
